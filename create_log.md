@@ -127,3 +127,11 @@ This application failed to start because no Qt platform plugin could be initiali
     ```
     sudo apt-get install nvidia-container-runtime
     ```
+
+# GPU を使用できるよう修正
+
+- 以下のコマンドで ROS Noetic の Docker イメージがどのように作成されたか見る
+  ```
+  docker history osrf/ros:noetic-desktop-full --no-trunc --format '{{ json .CreatedBy }}'
+  ```
+- nvidia/cuda よりも osrf/ros のほうが history が短かったので、nvidia/cuda を元に Dockerfile を再構成

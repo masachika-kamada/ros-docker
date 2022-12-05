@@ -6,7 +6,7 @@ docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/.Xauthority:/root/.Xauthority \
     --gpus all \
-    --name=ros1_noetic \
-    ros1_noetic \
+    --name=ros-noetic-cuda \
+    ros-noetic-cuda \
     bash
 echo "done"
