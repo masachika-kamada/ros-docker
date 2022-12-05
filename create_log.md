@@ -18,7 +18,6 @@ docker run -it --name=ros-foxy osrf/ros:foxy-desktop
 ターミナル①
 ```
 docker run -it --name=ros-noetic osrf/ros:noetic-desktop
-root@de692e2f1c85:/# source /opt/ros/noetic/setup.bash 
 root@de692e2f1c85:/# roscore
 ```
 ターミナル②
@@ -69,19 +68,16 @@ docker run --name r1_noetic -e DISPLAY=host.internal:0.0 -it osrf/ros:noetic-des
 ```
 
 しかし turtlesim を実行するとエラー
-
-```
-docker exec -it r1_noetic bash
+> docker exec -it r1_noetic bash
 root@dab70c8872ba:/# source /opt/ros/noetic/setup.bash 
 root@dab70c8872ba:/# rosrun turtlesim turtlesim_node 
 qt.qpa.xcb: could not connect to display host.internal:0.0
 qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
 This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
-
-Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.
-
-Aborted (core dumped)
-```
+>
+> Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.
+>
+> Aborted (core dumped)
 
 - ディスプレイの環境変数が違うのだと考え、値を変えて試してみたが解決せず
   - $DISPLAY でディスプレイの環境変数を表示させられる（これに合わせても解決せず）
@@ -112,6 +108,22 @@ Aborted (core dumped)
 ## turtlesim で動作確認
 
 - ターミナル①：`roscore`
-- ターミナル①：`rosrun turtlesim turtlesim_node`
-- ターミナル①：`rosrun turtlesim turtle_teleop_key`
+- ターミナル②：`rosrun turtlesim turtlesim_node`
+- ターミナル③：`rosrun turtlesim turtle_teleop_key`
 
+## GPU 関連
+
+- run.sh 内の `--runtime=nvidia` でエラー
+  > [WSL2]docker: Error response from daemon: Unknown runtime specified nvidia. 
+  - `--runtime=nvidia` を `--gpus all` に変更することで解決
+- Docker コンテナで GPU を使用できることを確認
+  ```
+  docker run --gpus all nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu20.04 nvidia-smi
+  ```
+  - 以下のエラーが発生
+    > docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]].
+    > ERRO[0394] error waiting for container: context canceled
+  - NVIDIA ドライバーのインストール忘れ
+    ```
+    sudo apt-get install nvidia-container-runtime
+    ```
