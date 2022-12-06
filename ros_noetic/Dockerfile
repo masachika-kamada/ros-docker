@@ -19,9 +19,3 @@ RUN echo "source /opt/ros/noetic/setup.sh" >> .bashrc
 RUN mkdir catkin_ws
 
 USER ubuntu
-
-# nvidia-container-runtime（描画するための環境変数の設定）
-ENV NVIDIA_VISIBLE_DEVICES \
-    ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES \
-    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
