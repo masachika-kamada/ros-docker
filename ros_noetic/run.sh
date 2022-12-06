@@ -1,3 +1,5 @@
+#!/bin/bash
+
 xhost +local:
 
 if [ ! -d "workspace" ]; then
