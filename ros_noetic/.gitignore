@@ -1,1 +1,2 @@
-workspace/
+workspace/*
+!init_ws.sh
