@@ -12,6 +12,6 @@ docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/.Xauthority:/home/ubuntu/.Xauthority \
     -v $PWD/workspace:/home/ubuntu/catkin_ws \
-    --name=ros_noetic \
-    ros_noetic \
+    --name=ros-noetic \
+    ros-noetic \
     bash

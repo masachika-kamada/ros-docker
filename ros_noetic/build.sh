@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t ros_noetic .
+docker build -t ros-noetic .
