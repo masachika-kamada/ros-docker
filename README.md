@@ -1,9 +1,9 @@
-# ROS Docker
+# ROS Docker for Ubuntu
 
 ## usage
 
 ```
-git clone https://github.com/masachika-kamada/ros-docker.git
+git clone https://github.com/masachika-kamada/ros-docker-ubuntu.git
 cd ros-docker/[desired directory]
 sh build.sh
 sh run.sh
